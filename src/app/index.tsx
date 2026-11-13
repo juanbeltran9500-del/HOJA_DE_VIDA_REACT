@@ -1,98 +1,191 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { Ionicons } from '@expo/vector-icons';
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import MiBoton from '../components/MiBoton';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function Inicio() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <ScrollView
+      style={estilos.contenedor}
+      contentContainerStyle={estilos.contenido}
+    >
+      <View style={estilos.encabezado}>
+        <Ionicons
+          name="person-circle-outline"
+          size={100}
+          color="#2563EB"
+        />
+
+        <Text style={estilos.nombre}>
+          Juan Beltrán
+        </Text>
+
+        <Text style={estilos.profesion}>
+          Tecnólogo en Análisis y Desarrollo de Software
+        </Text>
+
+        <Text style={estilos.institucion}>
+          SENA - CGMLTI
+        </Text>
+      </View>
+
+      <View style={estilos.seccion}>
+        <Text style={estilos.titulo}>
+          Perfil Profesional
+        </Text>
+
+        <Text style={estilos.parrafo}>
+          Aprendiz del SENA apasionado por el desarrollo
+          de software y la tecnología. Con conocimientos
+          en React, TypeScript, HTML, CSS, Python,
+          bases de datos y desarrollo de aplicaciones
+          web y móviles. Me caracterizo por mi
+          responsabilidad, disposición para aprender
+          y trabajo en equipo.
+        </Text>
+      </View>
+
+      <View style={estilos.seccion}>
+        <Text style={estilos.titulo}>
+          Información Académica
+        </Text>
+
+        <Text style={estilos.parrafo}>
+          Programa: Análisis y Desarrollo de Software
+        </Text>
+
+        <Text style={estilos.parrafo}>
+          Institución: SENA
+        </Text>
+
+        <Text style={estilos.parrafo}>
+          Centro: CGMLTI
+        </Text>
+
+        <Text style={estilos.parrafo}>
+          Ficha: 3407181
+        </Text>
+      </View>
+
+      <View style={estilos.seccion}>
+        <Text style={estilos.titulo}>
+          Contacto y Redes Sociales
+        </Text>
+
+        <MiBoton
+          textoBoton="Enviar Correo"
+          colorBoton="#2563EB"
+          onPress={() =>
+            Alert.alert(
+              'Correo electrónico',
+              'Agrega aquí tu correo personal'
+            )
+          }
+        />
+
+        <MiBoton
+          textoBoton="Llamar"
+          colorBoton="#16A34A"
+          onPress={() =>
+            Alert.alert(
+              'Teléfono',
+              'Agrega aquí tu número de contacto'
+            )
+          }
+        />
+
+        <MiBoton
+          textoBoton="GitHub"
+          colorBoton="#334155"
+          onPress={() =>
+            Alert.alert(
+              'Mi GitHub',
+              'https://github.com/juanbeltran9500-del'
+            )
+          }
+        />
+
+        <MiBoton
+          textoBoton="LinkedIn"
+          colorBoton="#0A66C2"
+          onPress={() =>
+            Alert.alert(
+              'LinkedIn',
+              'Agrega aquí tu perfil de LinkedIn'
+            )
+          }
+        />
+
+        <MiBoton
+          textoBoton="Mis Proyectos"
+          colorBoton="#7C3AED"
+          onPress={() =>
+            Alert.alert(
+              'Repositorio del proyecto',
+              'https://github.com/juanbeltran9500-del/HOJA_DE_VIDA_REACT'
+            )
+          }
+        />
+      </View>
+    </ScrollView>
   );
 }
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
+const estilos = StyleSheet.create({
+  contenedor: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#F4F7FB',
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
+  contenido: {
+    padding: 20,
+    paddingBottom: 35,
+  },
+  encabezado: {
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    marginTop: 25,
+    marginBottom: 25,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  nombre: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#214D80',
+    marginTop: 8,
   },
-  title: {
+  profesion: {
+    fontSize: 15,
+    color: '#2563EB',
     textAlign: 'center',
+    marginTop: 6,
+    fontWeight: '600',
   },
-  code: {
-    textTransform: 'uppercase',
+  institucion: {
+    fontSize: 14,
+    color: '#64748B',
+    marginTop: 5,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  seccion: {
+    backgroundColor: '#FFFFFF',
+    padding: 18,
+    borderRadius: 12,
+    marginBottom: 18,
+    elevation: 3,
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#214D80',
+    marginBottom: 12,
+  },
+  parrafo: {
+    fontSize: 14,
+    color: '#475569',
+    lineHeight: 22,
+    marginBottom: 8,
   },
 });
